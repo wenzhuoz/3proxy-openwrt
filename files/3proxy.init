@@ -1,0 +1,18 @@
+#!/bin/sh /etc/rc.common
+
+START=90
+STOP=10
+USE_PROCD=1
+
+BIN=/usr/bin/3proxy
+CONF_FILE=/etc/3proxy.cfg
+LOG_DIR=/var/log/3proxy
+
+start_service() {
+	mkdir -p $LOG_DIR
+	procd_open_instance
+	procd_set_param command $BIN "$CONF_FILE"
+	procd_set_param respawn
+	procd_close_instance
+}
+
